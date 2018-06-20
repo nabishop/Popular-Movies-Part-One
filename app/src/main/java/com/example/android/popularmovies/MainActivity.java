@@ -31,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            System.out.println("SAVED INSTANCE STATE " + savedInstanceState.toString() + "\n");
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gridView = findViewById(R.id.gridView);

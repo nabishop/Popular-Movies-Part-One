@@ -32,7 +32,7 @@ public class MovieAdapter extends ArrayAdapter<Movie> {
             // fix this once created a layour
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_image, parent, false);
         }
-        ImageView posterImageView = convertView.findViewById(R.id.poster_iv);
+        ImageView posterImageView = convertView.findViewById(R.id.custom_iv);
         Picasso.with(getContext()).load(movie.getPicture()).into(posterImageView);
         return convertView;
     }
