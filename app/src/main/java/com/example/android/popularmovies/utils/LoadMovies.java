@@ -29,7 +29,7 @@ public class LoadMovies {
         public static final String BASE_URL = "http://api.themoviedb.org/3/movie";
         public static final String API_KEY = "api_key";
         public static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
-        public static final String IMAGE_SIZE = "w185";
+        public static final String IMAGE_SIZE = "w500";
         public static final String LOGIN = "5ff29a37294d985fda6354cb387c6ce2";
         public final static String popular = "popular?";
         public final static String toprated = "top_rated?";
@@ -95,7 +95,7 @@ public class LoadMovies {
                 String overview = movie.getString(JSONParsing.overviewKey);
                 double rating = movie.getDouble(JSONParsing.ratingKey);
                 String picture = getImageUrl(movie, imageBase);
-                Date date = getDate(movie);
+                String date = getDate(movie);
 
                 //make and add movie to list
                 movieList.add(new Movie(id, title, picture, overview, date, rating));
@@ -109,10 +109,9 @@ public class LoadMovies {
     }
 
     // helper to get the date of the movie
-    private static Date getDate(JSONObject jsonObject) {
+    private static String getDate(JSONObject jsonObject) {
         try {
-            return new GsonBuilder().setDateFormat("yyyy-MM-dd").create().fromJson
-                    (jsonObject.getString(JSONParsing.releaseDateKey), Date.class);
+            return jsonObject.getString(JSONParsing.releaseDateKey);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

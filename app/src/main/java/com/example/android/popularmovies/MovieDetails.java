@@ -47,14 +47,14 @@ public class MovieDetails extends AppCompatActivity {
 
         // get rating into view
         TextView ratingTextView = findViewById(R.id.rating_tv);
-        ratingTextView.setText(String.valueOf(rating));
+        ratingTextView.setText("Rating " + String.valueOf(rating));
 
         // get release date into view
         TextView dateTextView = findViewById(R.id.date_tv);
-        dateTextView.setText(date);
+        dateTextView.setText("Release Date " + date);
 
         // get description text into view
         TextView descriptionTextView = findViewById(R.id.description_tv);
-        descriptionTextView.setText(description);
+        descriptionTextView.setText("Description\n" + description);
     }
 }

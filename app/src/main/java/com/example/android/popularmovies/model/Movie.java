@@ -14,12 +14,12 @@ public class Movie implements Parcelable {
     private double rating;
 
     public Movie(String id, String title, String picture,
-                 String overview, Date date, double rating) {
+                 String overview, String date, double rating) {
         this.id = id;
         this.title = title;
         this.picture = picture;
         this.overview = overview;
-        this.date = date.toString();
+        this.date = date;
         this.rating = rating;
     }
 
