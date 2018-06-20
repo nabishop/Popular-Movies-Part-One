@@ -1,8 +1,11 @@
 package com.example.android.popularmovies.utils;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 /**
  * Created by Nick on 6/18/2018.
@@ -22,8 +25,10 @@ public class Connection {
                 urlConnection.connect();
                 // 200 is good, 401 is unauthorized
                 if (urlConnection.getResponseCode() == 200) {
+                    System.out.println("CONNECTION WORKED");
                     inputStream = urlConnection.getInputStream();
                     jsonResponse = readStream(inputStream);
+                    System.out.println("JSON IN CONNECTION: " + jsonResponse);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -36,6 +41,7 @@ public class Connection {
                     urlConnection.disconnect();
                 }
             }
+            System.out.println("JSON RESPONSE: " + jsonResponse);
             return jsonResponse;
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,7 +50,21 @@ public class Connection {
     }
 
     private static String readStream(InputStream inputStream) {
-        return null;
+        StringBuilder builder = new StringBuilder();
+        try {
+            BufferedReader bufferedReader =
+                    new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+            String currentLine = bufferedReader.readLine();
+            while (currentLine != null) {
+                builder.append(currentLine);
+                currentLine = bufferedReader.readLine();
+            }
+            return builder.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.ArrayList;
@@ -50,9 +51,9 @@ public class LoadMovies {
         if (sort != null) {
             switch (sort) {
                 case "top_rated?":
-                    return loadMovies(sort);
+                    return loadMovies(sort.substring(0, sort.length() - 1));
                 case "popular?":
-                    return loadMovies(sort);
+                    return loadMovies(sort.substring(0, sort.length() - 1));
             }
         }
         return null;
@@ -133,9 +134,6 @@ public class LoadMovies {
 
     // helper to build my URL based on sorting method (popularity/rating)
     private static URL getMovieURL(String baseUrl, String sortBy, String apiKey) {
-        System.out.println("BASE URL: " + baseUrl);
-        System.out.println("SORT BY: " + sortBy);
-        System.out.println("APIKEY: " + apiKey);
         Uri reguesting = Uri.parse(baseUrl).buildUpon().appendPath(sortBy)
                 .appendQueryParameter(URLParsing.API_KEY, apiKey).build();
         try {
