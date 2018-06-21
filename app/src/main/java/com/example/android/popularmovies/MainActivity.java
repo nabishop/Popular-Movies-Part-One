@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private String description;
     private String poster;
     private String id;
+    private static final String MOVIE_LIST_LIFE_KEY = "movieList";
 
 
     @Override
@@ -37,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gridView = findViewById(R.id.gridView);
-        if (savedInstanceState != null && savedInstanceState.containsKey("movieList")) {
-            movies = savedInstanceState.getParcelableArrayList("movieList");
+        if (savedInstanceState != null && savedInstanceState.containsKey(MOVIE_LIST_LIFE_KEY)) {
+            movies = savedInstanceState.getParcelableArrayList(MOVIE_LIST_LIFE_KEY);
         } else {
             movies = new ArrayList<>();
         }
@@ -84,13 +85,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList("movieList", movies);
+        outState.putParcelableArrayList(MOVIE_LIST_LIFE_KEY, movies);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        movies = savedInstanceState.getParcelableArrayList("movieList");
+        movies = savedInstanceState.getParcelableArrayList(MOVIE_LIST_LIFE_KEY);
         super.onRestoreInstanceState(savedInstanceState);
     }
 
