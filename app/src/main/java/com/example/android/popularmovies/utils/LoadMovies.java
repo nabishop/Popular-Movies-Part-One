@@ -24,18 +24,6 @@ import java.util.List;
  */
 
 public class LoadMovies {
-
-    public static final class URLParsing {
-        public static final String BASE_URL = "http://api.themoviedb.org/3/movie";
-        public static final String API_KEY = "api_key";
-        public static final String IMAGE_BASE_URL = "http://image.tmdb.org/t/p/";
-        public static final String IMAGE_SIZE = "w500";
-        public static final String LOGIN = "5ff29a37294d985fda6354cb387c6ce2";
-        public final static String popular = "popular?";
-        public final static String toprated = "top_rated?";
-    }
-
-
     public static class JSONParsing {
         private static final String resultsKey = "results";
         private static final String idKey = "id";
@@ -50,9 +38,9 @@ public class LoadMovies {
         System.out.println("PASSING IN " + sort + " IN getMovieList");
         if (sort != null) {
             switch (sort) {
-                case "top_rated?":
+                case URLParsing.toprated:
                     return loadMovies(sort.substring(0, sort.length() - 1));
-                case "popular?":
+                case URLParsing.popular:
                     return loadMovies(sort.substring(0, sort.length() - 1));
             }
         }

@@ -25,8 +25,12 @@ public class MovieDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // set up
         super.onCreate(savedInstanceState);
+        setUpUI(savedInstanceState);
+        populateUI();
+    }
+
+    private void setUpUI(Bundle savedInstanceState) {
         setContentView(R.layout.movie_details);
         scrollView = (ScrollView) findViewById(R.id.scrollView);
         Intent intent = getIntent();
@@ -36,7 +40,9 @@ public class MovieDetails extends AppCompatActivity {
         date = intent.getStringExtra("date");
         poster = intent.getStringExtra("poster");
         rating = intent.getDoubleExtra("rating", 0.0);
+    }
 
+    private void populateUI() {
         // get image into view
         ImageView imageView = findViewById(R.id.poster_iv);
         Picasso.with(getApplicationContext()).load(poster).into(imageView);

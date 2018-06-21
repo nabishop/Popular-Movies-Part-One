@@ -13,20 +13,21 @@ import android.widget.GridView;
 import com.example.android.popularmovies.model.Movie;
 import com.example.android.popularmovies.utils.LoadMovies;
 import com.example.android.popularmovies.utils.MovieAdapter;
+import com.example.android.popularmovies.utils.URLParsing;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    private GridView gridView;
-    private ArrayList<Movie> movies;
-    private MovieAdapter movieAdapter;
-    private String title;
-    private double rating;
-    private String date;
-    private String description;
-    private String poster;
-    private String id;
+    private static GridView gridView;
+    private static ArrayList<Movie> movies;
+    private static MovieAdapter movieAdapter;
+    private static String title;
+    private static double rating;
+    private static String date;
+    private static String description;
+    private static String poster;
+    private static String id;
     private static final String MOVIE_LIST_LIFE_KEY = "movieList";
 
 
@@ -47,16 +48,16 @@ public class MainActivity extends AppCompatActivity {
         gridView.setAdapter(movieAdapter);
         helperOnItemClick();
         // asynctask
-        new MovieASyncTask().execute(LoadMovies.URLParsing.popular);
+        new MovieASyncTask().execute(URLParsing.popular);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         int id = menuItem.getItemId();
         if (id == R.id.top_rated_menu) {
-            new MovieASyncTask().execute(LoadMovies.URLParsing.toprated);
+            new MovieASyncTask().execute(URLParsing.toprated);
         } else {
-            new MovieASyncTask().execute(LoadMovies.URLParsing.popular);
+            new MovieASyncTask().execute(URLParsing.popular);
         }
         return super.onOptionsItemSelected(menuItem);
     }
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private class MovieASyncTask extends AsyncTask<String, Void, List<Movie>> {
+    private static class MovieASyncTask extends AsyncTask<String, Void, List<Movie>> {
 
         @Override
         protected List<Movie> doInBackground(String... strings) {
